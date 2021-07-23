@@ -16,6 +16,19 @@ import toErrorMap from "utils/toErrorMap";
 import { RegisterSchema } from "validation/auth.schema";
 
 export default function Register() {
+  const history = useHistory();
+
+  const handleSubmit = async (values, { setErrors }) => {
+    try {
+      const { data } = await register(values);
+      console.log(data);
+      history.push("/channels/me");
+    } catch (err) {
+      // console.log(err, setErrors);
+      setErrors(toErrorMap(err));
+    }
+  };
+
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
       <Box px={4} width="full" maxWidth="500px" textAlign="center">
@@ -30,11 +43,9 @@ export default function Register() {
             <Formik
               initialValues={{ email: "", username: "", password: "" }}
               validationSchema={RegisterSchema}
-              onSubmit={values => {
-                console.log(values);
-              }}
+              onSubmit={handleSubmit}
             >
-              {() => (
+              {({ isSubmitting }) => (
                 <Form>
                   <InputField
                     label="Email"
@@ -58,7 +69,7 @@ export default function Register() {
                     width="full"
                     mt={4}
                     type="submit"
-                    isLoading={false}
+                    isLoading={isSubmitting}
                     _hover={{ bg: "highlight.hover" }}
                     _active={{ bg: "highlight.active" }}
                     _focus={{ boxShadow: "none" }}
