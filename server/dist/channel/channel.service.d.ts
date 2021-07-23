@@ -1,0 +1,30 @@
+import { Repository } from 'typeorm';
+import { Channel } from '../entities/channel.entity';
+import { Member } from '../entities/member.entity';
+import { User } from '../entities/user.entity';
+import { Guild } from '../entities/guild.entity';
+import { DMChannelResponse } from '../models/response/DMChannelResponse';
+import { SocketService } from '../socket/socket.service';
+import { ChannelResponse } from '../models/response/ChannelResponse';
+import { ChannelInput } from '../models/input/ChannelInput';
+import { PCMember } from '../entities/pcmember.entity';
+import { DMMember } from '../entities/dmmember.entity';
+export declare class ChannelService {
+    private channelRepository;
+    private guildRepository;
+    private memberRepository;
+    private userRepository;
+    private pcMemberRepository;
+    private dmMemberRepository;
+    private readonly socketService;
+    constructor(channelRepository: Repository<Channel>, guildRepository: Repository<Guild>, memberRepository: Repository<Member>, userRepository: Repository<User>, pcMemberRepository: Repository<PCMember>, dmMemberRepository: Repository<DMMember>, socketService: SocketService);
+    createChannel(guildId: string, userId: string, input: ChannelInput): Promise<boolean>;
+    getGuildChannels(guildId: string, userId: string): Promise<ChannelResponse[]>;
+    getOrCreateChannel(userId: string, memberId: string): Promise<DMChannelResponse>;
+    getDirectMessageChannels(userId: string): Promise<DMChannelResponse[]>;
+    editChannel(userId: string, channelId: string, input: ChannelInput): Promise<boolean>;
+    deleteChannel(userId: string, channelId: string): Promise<boolean>;
+    getPrivateChannelMembers(userId: string, channelId: string): Promise<string[]>;
+    setDirectMessageStatus(channelId: string, userId: string, isOpen: boolean): Promise<boolean>;
+    toChannelResponse(channel: Channel): ChannelResponse;
+}

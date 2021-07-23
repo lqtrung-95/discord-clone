@@ -1,0 +1,31 @@
+import e from 'express';
+import { Repository } from 'typeorm';
+import { User } from '../entities/user.entity';
+import { ChangePasswordInput } from '../models/input/ChangePasswordInput';
+import { LoginInput } from '../models/input/LoginInput';
+import { RegisterInput } from '../models/input/RegisterInput';
+import { ResetPasswordInput } from '../models/input/ResetPasswordInput';
+import { UpdateInput } from '../models/input/UpdateInput';
+import { MemberResponse } from '../models/response/MemberResponse';
+import { RequestResponse } from '../models/response/RequestResponse';
+import { UserResponse } from '../models/response/UserResponse';
+import { SocketService } from '../socket/socket.service';
+import { BufferFile } from '../types/BufferFile';
+export declare class UserService {
+    private userRepository;
+    private readonly socketService;
+    constructor(userRepository: Repository<User>, socketService: SocketService);
+    register(credentials: RegisterInput, req: e.Request): Promise<UserResponse>;
+    login(credentials: LoginInput, req: e.Request): Promise<UserResponse>;
+    forgotPassword(email: string): Promise<boolean>;
+    resetPassword(input: ResetPasswordInput, req: e.Request): Promise<UserResponse>;
+    changePassword(input: ChangePasswordInput, userId: string): Promise<boolean>;
+    findCurrentUser(id: string): Promise<UserResponse>;
+    updateUser(id: string, data: UpdateInput, image?: BufferFile): Promise<UserResponse>;
+    getFriends(userId: string): Promise<MemberResponse[]>;
+    getPendingFriendRequests(userId: string): Promise<RequestResponse[]>;
+    sendFriendRequest(userId: string, memberId: string): Promise<boolean>;
+    acceptFriendRequest(userId: string, memberId: string): Promise<boolean>;
+    cancelFriendRequest(userId: string, memberId: string): Promise<boolean>;
+    removeFriend(userId: string, memberId: string): Promise<boolean>;
+}
