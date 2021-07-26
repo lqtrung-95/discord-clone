@@ -4,20 +4,22 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter as Router } from "react-router-dom";
 import customTheme from "utils/theme";
 import GlobalState from "./components/sections/GlobalState";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const client = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
       staleTime: Infinity,
-      cacheTime: 0,
-    },
-  },
+      cacheTime: 0
+    }
+  }
 });
 
 export default function AppProviders({ children }) {
   return (
     <QueryClientProvider client={client}>
+      <ReactQueryDevtools />
       <ColorModeScript />
       <ChakraProvider theme={customTheme}>
         <GlobalState>
