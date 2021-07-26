@@ -29,6 +29,9 @@ export default function Account() {
   const { data: user } = useQuery(aKey, () =>
     getAccount().then(res => res.data)
   );
+  const logoutUser = userStore(state => state.logout);
+  const cache = useQueryClient();
+
   const history = useHistory();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,7 +46,14 @@ export default function Account() {
   const [cropImage, setCropImage] = useState("");
   const [croppedImage, setCroppedImage] = useState(null);
 
-  async function handleLogout() {}
+  async function handleLogout() {
+    const { data } = await logout();
+    if (data) {
+      cache.clear();
+      logoutUser();
+      history.push("/");
+    }
+  }
 
   async function handleSubmit() {}
 
