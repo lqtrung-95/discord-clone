@@ -8,7 +8,27 @@ import InputField from "components/shared/InputField";
 import { ForgotPasswordSchema } from "validation/auth.schema";
 
 export default function ForgotPassword() {
-  async function handleSubmit() {}
+  const history = useHistory();
+  const toast = useToast();
+
+  const handleSubmit = async (values, { setErrors }) => {
+    try {
+      const { data } = await forgotPassword(values.email);
+      if (data) {
+        history.push("/");
+      }
+    } catch (err) {
+      toast({
+        title: "Reset Password",
+        description:
+          "If an account with that email exists, we sent you an email",
+        status: "success",
+        duration: 5000,
+        isClosable: true
+      });
+      setErrors(toErrorMap(err));
+    }
+  };
 
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
@@ -21,7 +41,11 @@ export default function ForgotPassword() {
             <Heading fontSize="24px">Forgot Password</Heading>
           </Box>
           <Box my={4} textAlign="left">
-            <Formik>
+            <Formik
+              initialValues={{ email: "" }}
+              validationSchema={ForgotPasswordSchema}
+              onSubmit={handleSubmit}
+            >
               {({ isSubmitting }) => (
                 <Form>
                   <InputField
