@@ -5,7 +5,7 @@ import {
   Heading,
   Image,
   Link,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { resetPassword } from "api/handler/auth";
 import { Form, Formik } from "formik";
@@ -17,7 +17,26 @@ import InputField from "components/shared/InputField";
 import { ResetPasswordSchema } from "validation/auth.schema";
 
 export default function ResetPassword() {
-  async function handleSubmit() {}
+  const history = useHistory();
+  const { token } = useParams();
+  const [tokenError, setTokenError] = useState("");
+  const setUser = userStore(state => state.setUser);
+
+  async function handleSubmit(values, { setErrors }) {
+    try {
+      const { data } = await resetPassword({ ...values, token });
+      if (data) {
+        setUser(data);
+        history.push("/channels/me");
+      }
+    } catch (err) {
+      const errorMap = toErrorMap(err);
+      if ("token" in errorMap) {
+        setTokenError(errorMap.token);
+      }
+      setErrors(errorMap);
+    }
+  }
 
   return (
     <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
@@ -30,7 +49,11 @@ export default function ResetPassword() {
             <Heading fontSize="24px">Reset Password</Heading>
           </Box>
           <Box my={4} textAlign="left">
-            <Formik>
+            <Formik
+              initialValues={{ newPassword: "", confirmNewPassword: "" }}
+              validationSchema={ResetPasswordSchema}
+              onSubmit={handleSubmit}
+            >
               {({ isSubmitting }) => (
                 <Form>
                   <InputField
@@ -62,7 +85,7 @@ export default function ResetPassword() {
                 </Form>
               )}
             </Formik>
-            {"tokenError" ? (
+            {tokenError ? (
               <Flex direction="column" mt="4" justify="center" align="center">
                 <Text>Invalid or expired token.</Text>
                 <Link as={RLink} to="/forgot-password" color="red">

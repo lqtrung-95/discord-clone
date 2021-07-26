@@ -16,16 +16,16 @@ export default function ForgotPassword() {
       const { data } = await forgotPassword(values.email);
       if (data) {
         history.push("/");
+        toast({
+          title: "Reset Password",
+          description:
+            "If an account with that email exists, we sent you an email",
+          status: "success",
+          duration: 5000,
+          isClosable: true
+        });
       }
     } catch (err) {
-      toast({
-        title: "Reset Password",
-        description:
-          "If an account with that email exists, we sent you an email",
-        status: "success",
-        duration: 5000,
-        isClosable: true
-      });
       setErrors(toErrorMap(err));
     }
   };

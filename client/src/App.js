@@ -18,7 +18,7 @@ export default function App() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/forgot-password" component={ForgotPassword} />
-      <Route path="reset-password/:token" component={ResetPassword} />
+      <Route path="/reset-password/:token" component={ResetPassword} />
       <AuthRoute exact path="/channels/me" component={Home} />
       <AuthRoute exact path="/channels/me/:channelId" component={Home} />
       <AuthRoute

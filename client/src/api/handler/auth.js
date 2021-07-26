@@ -11,4 +11,4 @@ export const forgotPassword = email =>
 
 export const changePassword = () => null;
 
-export const resetPassword = () => null;
+export const resetPassword = body => api.post("/account/reset-password", body);
