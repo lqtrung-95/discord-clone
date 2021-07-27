@@ -13,7 +13,7 @@ export const getFriends = () => null;
 
 export const getPendingRequests = () => null;
 
-export const sendFriendRequest = () => null;
+export const sendFriendRequest = id => api.post(`/account/${id}/friend`);
 
 export const removeFriend = () => null;
 

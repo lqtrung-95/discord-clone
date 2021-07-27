@@ -12,7 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useClipboard,
+  useClipboard
 } from "@chakra-ui/react";
 import { sendFriendRequest } from "api/handler/account";
 import { Form, Formik } from "formik";
@@ -24,10 +24,25 @@ import toErrorMap from "utils/toErrorMap";
 import InputField from "components/shared/InputField";
 
 export default function AddFriendModal({ isOpen, onClose }) {
-  const current = userStore((state) => state.current);
+  const current = userStore(state => state.current);
+  const cache = useQueryClient();
   const { hasCopied, onCopy } = useClipboard(current?.id || "");
 
-  async function handleAddFriend() {}
+  async function handleAddFriend(values, { setErrors }) {
+    if (values.id === "" && values.id.length !== 20) {
+      setErrors({ id: "Enter a valid ID" });
+    } else {
+      try {
+        const { data } = await sendFriendRequest(values.id);
+        if (data) {
+          onClose();
+          cache.invalidateQueries(rKey);
+        }
+      } catch (err) {
+        setErrors(toErrorMap(err));
+      }
+    }
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
