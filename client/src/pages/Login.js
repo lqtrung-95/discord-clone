@@ -29,13 +29,11 @@ export default function Login() {
       }
     } catch (err) {
       // 401, 404
-      console.log(err?.response);
       if (err?.response?.status === 401) {
         setErrors({ password: "Invalid credentials" });
       } else if (err?.response?.status === 404) {
         setErrors({ email: "No user found" });
       }
-      setErrors(toErrorMap(err));
     }
   };
   return (

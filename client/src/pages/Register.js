@@ -27,7 +27,7 @@ export default function Register() {
         history.push("/channels/me");
       }
     } catch (err) {
-      // console.log(err, setErrors);
+      console.log(err, toErrorMap(err));
       setErrors(toErrorMap(err));
     }
   };
