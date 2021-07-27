@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import useGetCurrentDM from "hooks/useGetCurrentDM";
 
 export default function DMHeader() {
+  const { channelId } = useParams();
+  const channel = useGetCurrentDM(channelId);
+
   return (
     <GridItem
       gridColumn={3}
@@ -17,14 +20,14 @@ export default function DMHeader() {
       <Flex align="center" ml={2}>
         <Icon as={FaAt} fontSize={"20px"} color={"brandGray.accent"} />
         <Text ml="2" fontWeight="semibold">
-          channel user username
+          {channel?.user.username}
         </Text>
         <Box
           ml={"2"}
           borderRadius={"50%"}
           h={"10px"}
           w={"10px"}
-          bg={"isOnline" ? "green.500" : "gray.500"}
+          bg={channel?.user.isOnline ? "green.500" : "gray.500"}
         />
       </Flex>
     </GridItem>

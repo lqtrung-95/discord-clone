@@ -20,15 +20,28 @@ export default function MessageInput() {
   const { guildId, channelId } = useParams();
   const qKey = guildId === undefined ? dmKey : cKey(guildId);
   const { data } = useQuery(qKey);
-  const channel = data?.find((c) => c.id === channelId);
+  const channel = data?.find(c => c.id === channelId);
 
   const socket = getSocket();
-  const current = userStore((state) => state.current);
-  const isTyping = channelStore((state) => state.typing);
+  const current = userStore(state => state.current);
+  const isTyping = channelStore(state => state.typing);
 
-  async function handleAddMessage(event) {}
+  async function handleAddMessage(event) {
+    if (event.key === "Enter") {
+      if (!text || !text.trim()) return;
+      socket.emit("stopTyping", channelId, current?.username);
+      setSubmitting(true);
+      setCurrentlyTyping(false);
+      const data = new FormData();
+      data.append("text", text.trim());
+      await sendMessage(channelId, data);
+      setText("");
+      setSubmitting(false);
+      inputRef?.current?.focus();
+    }
+  }
 
-  const getTypingString = (members) => {
+  const getTypingString = members => {
     switch (members.length) {
       case 1:
         return members[0];
