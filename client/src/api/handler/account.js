@@ -2,7 +2,12 @@ import { api } from "../apiClient";
 
 export const getAccount = () => api.get("/account");
 
-export const updateAccount = () => null;
+export const updateAccount = body =>
+  api.put("/account", body, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
 
 export const getFriends = () => null;
 

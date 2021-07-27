@@ -30,6 +30,7 @@ export default function Account() {
     getAccount().then(res => res.data)
   );
   const logoutUser = userStore(state => state.logout);
+  const setUser = userStore(state => state.setUser);
   const cache = useQueryClient();
 
   const history = useHistory();
@@ -55,7 +56,26 @@ export default function Account() {
     }
   }
 
-  async function handleSubmit() {}
+  async function handleUpdateAccount(values, { setErrors }) {
+    try {
+      const formData = new FormData();
+      formData.append("email", values.email);
+      formData.append("username", values.username);
+      formData.append("image", croppedImage ?? imageUrl);
+      const { data } = await updateAccount(formData);
+      if (data) {
+        setUser(data);
+        toast({
+          title: "Account updated",
+          status: "success",
+          duration: 3000,
+          isClosable: true
+        });
+      }
+    } catch (err) {
+      setErrors(toErrorMap(err));
+    }
+  }
 
   function handleSelectImage(event) {}
 
@@ -78,7 +98,7 @@ export default function Account() {
                 image: null
               }}
               validationSchema={UserSchema}
-              onSubmit={handleSubmit}
+              onSubmit={handleUpdateAccount}
             >
               {({ isSubmitting, values }) => (
                 <Form>
