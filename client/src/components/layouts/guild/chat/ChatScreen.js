@@ -17,9 +17,24 @@ export default function ChatScreen() {
   const [hasMore, setHasMore] = useState(true);
   const qKey = `messages-${channelId}`;
 
+  const { data, isLoading, fetchNextPage } = useInfiniteQuery(
+    qKey,
+    async ({ pageParam = null }) => {
+      const { data } = await getMessages(channelId, pageParam);
+      if (data.length !== 35) setHasMore(false);
+      return data;
+    },
+    {
+      getNextPageParam: lastPage =>
+        hasMore && lastPage.length
+          ? lastPage[lastPage.length - 1].createdAt
+          : ""
+    }
+  );
+
   useMessageSocket(channelId, qKey);
 
-  if (false) {
+  if (isLoading) {
     return (
       <ChatGrid>
         <Flex align={"center"} justify={"center"} h={"full"}>
@@ -29,9 +44,13 @@ export default function ChatScreen() {
     );
   }
 
-  const checkIfWithinTime = (message1, message2) => {};
+  const checkIfWithinTime = (message1, message2) => {
+    if (message1.user.id !== message2.user.id) return false;
+    if (message1.createdAt === message2.createdAt) return false;
+    return getTimeDifference(message1.createdAt, message2.createdAt) <= 5;
+  };
 
-  const messages = [];
+  const messages = data ? data.pages.flatMap(p => p) : [];
 
   return (
     <ChatGrid>
