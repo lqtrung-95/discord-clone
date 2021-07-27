@@ -11,14 +11,19 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { editMessage } from "api/handler/messages";
 import React, { useState } from "react";
 import { getTime } from "utils/dateUtils";
 
 export default function EditMessageModal({ message, isOpen, onClose }) {
-  async function handleEditMessage() {}
+  const [text, setText] = useState(message.text);
+  async function handleEditMessage() {
+    if (!text || !text.trim()) return;
+    await editMessage(message.id, text.trim());
+    onClose();
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -38,16 +43,17 @@ export default function EditMessageModal({ message, isOpen, onClose }) {
             py={2}
           >
             <Flex alignItems="center">
-              <Avatar h="40px" w="40px" ml="4" src="" />
+              <Avatar h="40px" w="40px" ml="4" src={message.user.image} />
               <Box ml="3">
                 <Flex alignItems="center">
-                  <Text>message user username</Text>
+                  <Text>{message.user.username}</Text>
                   <Text fontSize="12px" color="brandGray.accent" ml="3">
-                    createdAt
+                    {getTime(message.createdAt)}
                   </Text>
                 </Flex>
                 <Input
-                  value="message text"
+                  value={text}
+                  onChange={event => setText(event.target.value)}
                   bg="brandGray.dark"
                   borderColor="black"
                   borderRadius="3px"
