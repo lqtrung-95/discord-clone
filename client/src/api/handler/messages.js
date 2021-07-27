@@ -10,6 +10,6 @@ export const sendMessage = (channelId, data, onUploadProgress) =>
     }
   });
 
-export const deleteMessage = () => null;
+export const deleteMessage = id => api.delete(`/messages/${id}`);
 
 export const editMessage = () => null;
