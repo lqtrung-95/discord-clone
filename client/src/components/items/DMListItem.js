@@ -5,7 +5,7 @@ import {
   Flex,
   Icon,
   ListItem,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
@@ -22,7 +22,7 @@ export default function DMListItem({ dm }) {
   async function handleCloseDM(event) {}
 
   return (
-    <Link to={`/channels/me/dm.id`}>
+    <Link to={`/channels/me/${dm.id}`}>
       <ListItem
         p="2"
         mx="2"
@@ -31,7 +31,7 @@ export default function DMListItem({ dm }) {
           bg: "brandGray.light",
           borderRadius: "5px",
           cursor: "pointer",
-          color: "#fff",
+          color: "#fff"
         }}
         bg={isActive ? "brandGray.active" : undefined}
         onMouseLeave={() => setShowButton(false)}
@@ -39,13 +39,13 @@ export default function DMListItem({ dm }) {
       >
         <Flex align={"center"} justify={"space-between"}>
           <Flex align="center">
-            <Avatar size="sm" src="">
+            <Avatar size="sm" src={dm.user.image}>
               <AvatarBadge
                 boxSize="1.25em"
                 bg={dm.user.isOnline ? "green.500" : "gray.500"}
               />
             </Avatar>
-            <Text ml="2">dm user username</Text>
+            <Text ml="2">{dm.user.username}</Text>
           </Flex>
           {showCloseButton && <Icon as={IoMdClose} onClick={handleCloseDM} />}
         </Flex>

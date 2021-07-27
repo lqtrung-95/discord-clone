@@ -11,6 +11,7 @@ import AccountBar from "../AccountBar";
 import dmScrollerCss from "./css/dmScrollerCSS";
 
 export default function DMSidebar() {
+  const { data } = useQuery(dmKey, () => getUserDMs().then(res => res.data));
   useDMSocket();
 
   return (
@@ -33,7 +34,10 @@ export default function DMSidebar() {
         DIRECT MESSAGES
       </Text>
       <UnorderedList listStyleType="none" ml="0" mt="4">
-        {"no data" && (
+        {data?.map(dm => (
+          <DMListItem key={dm.id} dm={dm} />
+        ))}
+        {data?.length === 0 && (
           <Box>
             <DMPlaceholder />
             <DMPlaceholder />
