@@ -77,9 +77,17 @@ export default function Account() {
     }
   }
 
-  function handleSelectImage(event) {}
+  function handleSelectImage(event) {
+    if (!event.currentTarget.files) return;
+    setCropImage(URL.createObjectURL(event.currentTarget.files[0]));
+    cropperOnOpen();
+  }
 
-  function applyCrop(file) {}
+  function applyCrop(file) {
+    setImageUrl(URL.createObjectURL(file));
+    setCroppedImage(new File([file], "avatar"));
+    cropperOnClose();
+  }
 
   if (!user) return null;
 
