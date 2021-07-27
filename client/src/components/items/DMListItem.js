@@ -18,8 +18,19 @@ export default function DMListItem({ dm }) {
   const location = useLocation();
   const isActive = location.pathname === currentPath;
   const [showCloseButton, setShowButton] = useState(false);
+  const cache = useQueryClient();
+  const history = useHistory();
 
-  async function handleCloseDM(event) {}
+  async function handleCloseDM(event) {
+    event.preventDefault();
+    await closeDirectMessage(dm.id);
+    cache.setQueryData(dmKey, d => {
+      return d?.filter(channel => channel.id !== dm.id);
+    });
+    if (isActive) {
+      history.replace("/channels/me");
+    }
+  }
 
   return (
     <Link to={`/channels/me/${dm.id}`}>
