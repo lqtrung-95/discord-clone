@@ -12,7 +12,6 @@ export default function PendingList() {
     getPendingRequests().then(res => res.data)
   );
 
-  console.log("data :>> ", data);
   const reset = homeStore(state => state.resetRequest);
 
   useEffect(() => {
