@@ -5,7 +5,7 @@ import {
   IconButton,
   ListItem,
   Text,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import React from "react";
 import { FaEllipsisV } from "react-icons/fa";
@@ -17,8 +17,16 @@ import RemoveFriendModal from "components/modals/RemoveFriendModal";
 
 export default function FriendsListItem({ friend }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const history = useHistory();
+  const cache = useQueryClient();
 
-  async function getDMChannel() {}
+  async function getDMChannel() {
+    const { data } = await getOrCreateDirectMessage(friend.id);
+    if (data) {
+      cache.invalidateQueries(dmKey);
+      history.push(`/channels/me/${data.id}`);
+    }
+  }
 
   return (
     <ListItem
@@ -26,7 +34,7 @@ export default function FriendsListItem({ friend }) {
       mx="3"
       _hover={{
         bg: "brandGray.dark",
-        borderRadius: "5px",
+        borderRadius: "5px"
       }}
     >
       <Flex align="center" justify="space-between">
@@ -48,7 +56,7 @@ export default function FriendsListItem({ friend }) {
           icon={<FaEllipsisV />}
           borderRadius="50%"
           aria-label="remove friend"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             onOpen();
           }}
