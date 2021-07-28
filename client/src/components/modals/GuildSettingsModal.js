@@ -81,7 +81,12 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
     cropperOnClose();
   }
 
-  async function handleInvalidateInvites() {}
+  async function handleInvalidateInvites() {
+    const { data } = await invalidateInviteLinks(guild.id);
+    if (data) {
+      setIsReset(true);
+    }
+  }
 
   if (!guild) return null;
 
@@ -112,7 +117,7 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
                           name={guild?.name}
                           bg={"brandGray.darker"}
                           color={"#fff"}
-                          src={imageUrl || ""}
+                          src={guild?.icon || ""}
                           _hover={{ cursor: "pointer", opacity: 0.5 }}
                           onClick={() => inputFile.current.click()}
                         />
