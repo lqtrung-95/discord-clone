@@ -15,14 +15,14 @@ import {
   ModalOverlay,
   Text,
   Tooltip,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import {
   deleteGuild,
   editGuild,
   getBanList,
   invalidateInviteLinks,
-  unbanMember,
+  unbanMember
 } from "api/handler/guilds";
 import { Form, Formik } from "formik";
 import React, { useRef, useState } from "react";
@@ -39,6 +39,7 @@ import InputField from "components/shared/InputField";
 import CropImageModal from "./CropImageModal";
 
 export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
+  const guild = useGetCurrentGuild(guildId);
   const [screen, setScreen] = useState("START");
   const [isReset, setIsReset] = useState(false);
 
@@ -51,7 +52,7 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
   const {
     isOpen: cropperIsOpen,
     onOpen: cropperOnOpen,
-    onClose: cropperOnClose,
+    onClose: cropperOnClose
   } = useDisclosure();
 
   const inputFile = useRef(null);
@@ -59,11 +60,30 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
   const [cropImage, setCropImage] = useState("");
   const [croppedImage, setCroppedImage] = useState(null);
 
-  async function handleEditGuild() {}
+  async function handleEditGuild(values, { setErrors, resetForm }) {
+    try {
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("image", croppedImage ?? imageUrl);
+      const { data } = await editGuild(guildId, formData);
+      if (data) {
+        resetForm();
+        onClose();
+      }
+    } catch (err) {
+      setErrors(toErrorMap(err));
+    }
+  }
 
-  function applyCrop(file) {}
+  function applyCrop(file) {
+    setImageUrl(URL.createObjectURL(file));
+    setCroppedImage(new File([file], "icon"));
+    cropperOnClose();
+  }
 
   async function handleInvalidateInvites() {}
+
+  if (!guild) return null;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -72,7 +92,7 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
         <ModalContent bg="brandGray.light">
           <Formik
             initialValues={{
-              name: "",
+              name: guild?.name
             }}
             validationSchema={GuildSchema}
             onSubmit={handleEditGuild}
@@ -89,7 +109,7 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
                       <Tooltip label="Change Icon" aria-label="Change Icon">
                         <Avatar
                           size="xl"
-                          name={"guild name"}
+                          name={guild?.name}
                           bg={"brandGray.darker"}
                           color={"#fff"}
                           src={imageUrl || ""}
@@ -101,7 +121,7 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
                         mt={"2"}
                         _hover={{
                           cursor: "pointer",
-                          color: "brandGray.accent",
+                          color: "brandGray.accent"
                         }}
                         onClick={() => {
                           setCroppedImage(null);
@@ -117,7 +137,7 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
                       accept="image/*"
                       ref={inputFile}
                       hidden
-                      onChange={async (e) => {
+                      onChange={async e => {
                         if (!e.currentTarget.files) return;
                         setCropImage(
                           URL.createObjectURL(e.currentTarget.files[0])
@@ -207,7 +227,7 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
         <DeleteGuildModal
           goBack={goBack}
           submitClose={submitClose}
-          name={"guild name"}
+          name={guild?.name}
           guildId={guildId}
         />
       )}
@@ -253,15 +273,15 @@ function DeleteGuildModal({ goBack, submitClose, name, guildId }) {
 function BanListModal({ goBack, guildId }) {
   const key = `bans-${guildId}`;
   const { data } = useQuery(key, () =>
-    getBanList(guildId).then((response) => response.data)
+    getBanList(guildId).then(response => response.data)
   );
   const cache = useQueryClient();
 
-  const unbanUser = async (id) => {
+  const unbanUser = async id => {
     const { data } = await unbanMember(guildId, id);
     if (data) {
-      cache.setQueryData(key, (d) => {
-        return d?.filter((b) => b.id !== id);
+      cache.setQueryData(key, d => {
+        return d?.filter(b => b.id !== id);
       });
     }
   };
@@ -274,12 +294,12 @@ function BanListModal({ goBack, guildId }) {
       <ModalBody pb={3} overflowY={"auto"} css={channelScrollbarCss}>
         <Text mb={2}>Bans are by account. Click on the icon to unban.</Text>
 
-        {data?.map((m) => (
+        {data?.map(m => (
           <Flex
             p={"3"}
             _hover={{
               bg: "brandGray.dark",
-              borderRadius: "5px",
+              borderRadius: "5px"
             }}
             align="center"
             justify="space-between"
@@ -292,7 +312,7 @@ function BanListModal({ goBack, guildId }) {
               icon={<IoPersonRemove />}
               borderRadius="50%"
               aria-label="unban user"
-              onClick={async (e) => {
+              onClick={async e => {
                 e.preventDefault();
                 await unbanUser(m.id);
               }}
