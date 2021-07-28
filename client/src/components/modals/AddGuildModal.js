@@ -9,7 +9,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { createGuild, joinGuild } from "api/handler/guilds";
 import { Form, Formik } from "formik";
@@ -152,13 +152,30 @@ function JoinServerModal({ goBack, submitClose }) {
 }
 
 function CreateServerModal({ goBack, submitClose }) {
-  async function handleCreateServer() {}
+  const current = userStore(state => state.current);
+  const cache = useQueryClient();
+  const history = useHistory();
+
+  async function handleCreateServer(values, { setErrors }) {
+    try {
+      const { data } = await createGuild(values);
+      if (data) {
+        cache.setQueryData(gKey, guilds => {
+          return [...guilds, data];
+        });
+      }
+      submitClose();
+      history.push(`/channels/${data.id}/${data.default_channel_id}`);
+    } catch (err) {
+      setErrors(toErrorMap(err));
+    }
+  }
 
   return (
     <ModalContent bg="brandGray.light">
       <Formik
         initialValues={{
-          name: `current user's server`,
+          name: `${current.username}'s server`
         }}
         validationSchema={GuildSchema}
         onSubmit={handleCreateServer}
