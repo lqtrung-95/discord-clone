@@ -4,10 +4,10 @@ export const getUserGuilds = () => api.get("/guilds");
 
 export const createGuild = body => api.post(`/guilds/create`, body);
 
-export const joinGuild = () => null;
+export const joinGuild = body => api.post("/guilds/join", body);
 
 export const getInviteLink = (id, isPermanent = false) =>
-  api.get(`/guilds/${id}/invite${isPermanent ? "isPermanent=true" : ""}`);
+  api.get(`/guilds/${id}/invite${isPermanent ? "?isPermanent=true" : ""}`);
 
 export const invalidateInviteLinks = () => null;
 
