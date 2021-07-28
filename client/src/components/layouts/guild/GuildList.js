@@ -11,6 +11,7 @@ import { gKey } from "utils/querykeys";
 import guildScrollbarCss from "./css/GuildScrollerCSS";
 
 export default function GuildList() {
+  const { data } = useQuery(gKey, () => getUserGuilds().then(res => res.data));
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useGuildSocket();
@@ -26,7 +27,9 @@ export default function GuildList() {
     >
       <HomeIcon />
       <UnorderedList listStyleType="none" ml="0">
-        guilds
+        {data?.map(guild => (
+          <GuildListItem key={guild.id} guild={guild} />
+        ))}
       </UnorderedList>
       <AddGuildIcon onOpen={onOpen} />
       {isOpen && <AddGuildModal isOpen={isOpen} onClose={onClose} />}

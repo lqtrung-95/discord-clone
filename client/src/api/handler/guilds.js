@@ -1,6 +1,6 @@
 import { api } from "../apiClient";
 
-export const getUserGuilds = () => null;
+export const getUserGuilds = () => api.get("/guilds");
 
 export const createGuild = () => null;
 
@@ -24,9 +24,9 @@ export const kickMember = () => null;
 
 export const banMember = () => null;
 
-export const leaveGuild = (id) => api.delete(`guilds/${id}`);
+export const leaveGuild = id => api.delete(`guilds/${id}`);
 
-export const getBanList = (id) => api.get(`guilds/${id}/bans`);
+export const getBanList = id => api.get(`guilds/${id}/bans`);
 
 export const unbanMember = (guildId, memberId) =>
   api.delete(`guilds/${guildId}/bans`, { data: { memberId } });
