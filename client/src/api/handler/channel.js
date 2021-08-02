@@ -2,7 +2,7 @@ import { api } from "../apiClient";
 
 export const getChannels = () => null;
 
-export const createChannel = () => null;
+export const createChannel = (id, body) => api.post(`/channels/${id}`, body);
 
 export const editChannel = () => null;
 

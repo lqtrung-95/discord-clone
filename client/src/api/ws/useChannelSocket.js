@@ -19,15 +19,13 @@ export default function useChannelSocket(guildId, key) {
       socket.disconnect();
     };
 
-    socket.on("add_channel", (newChannel) => {
-      cache.setQueryData(key, (data) => {
-        return [...data, newChannel];
-      });
+    socket.on("add_channel", newChannel => {
+      cache.invalidateQueries(key);
     });
 
-    socket.on("edit_channel", (editedChannel) => {
-      cache.setQueryData(key, (d) => {
-        const index = d?.findIndex((c) => c.id === editedChannel.id);
+    socket.on("edit_channel", editedChannel => {
+      cache.setQueryData(key, d => {
+        const index = d?.findIndex(c => c.id === editedChannel.id);
         if (index !== -1) {
           d[index] = editedChannel;
         } else if (editedChannel.isPublic) {
@@ -37,8 +35,8 @@ export default function useChannelSocket(guildId, key) {
       });
     });
 
-    socket.on("delete_channel", (deleteId) => {
-      cache.setQueryData(key, (d) => {
+    socket.on("delete_channel", deleteId => {
+      cache.setQueryData(key, d => {
         const currentPath = `/channels/${guildId}/${deleteId}`;
         if (location.pathname === currentPath && guild) {
           if (deleteId === guild.default_channel_id) {
@@ -47,15 +45,15 @@ export default function useChannelSocket(guildId, key) {
             history.replace(`${guild.default_channel_id}`);
           }
         }
-        return d?.filter((c) => c.id !== deleteId);
+        return d?.filter(c => c.id !== deleteId);
       });
     });
 
-    socket.on("new_notification", (id) => {
+    socket.on("new_notification", id => {
       const currentPath = `/channels/${guildId}/${id}`;
       if (location.pathname !== currentPath) {
-        cache.setQueryData(key, (d) => {
-          const index = d?.findIndex((c) => c.id === id);
+        cache.setQueryData(key, d => {
+          const index = d?.findIndex(c => c.id === id);
           if (index !== -1) {
             d[index] = { ...d[index], hasNotification: true };
           }

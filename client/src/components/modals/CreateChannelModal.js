@@ -13,7 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Switch,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { createChannel } from "api/handler/channel";
 import { getGuildMembers } from "api/handler/guilds";
@@ -30,22 +30,36 @@ import InputField from "components/shared/InputField";
 export default function CreateChannelModal({ guildId, isOpen, onClose }) {
   const key = mKey(guildId);
 
-  async function handleCreateChannel() {}
+  async function handleCreateChannel(values, { setErrors, resetForm }) {
+    try {
+      const ids = [];
+      const { data } = await createChannel(guildId, {
+        ...values,
+        members: ids
+      });
+      if (data) {
+        resetForm();
+        onClose();
+      }
+    } catch (err) {
+      setErrors(toErrorMap(err));
+    }
+  }
 
   const members = [];
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleCreateItem = (item) => {
-    setSelectedItems((curr) => [...curr, item]);
+  const handleCreateItem = item => {
+    setSelectedItems(curr => [...curr, item]);
   };
 
-  const handleSelectedItemsChange = (selectedItems) => {
+  const handleSelectedItemsChange = selectedItems => {
     if (selectedItems) {
       setSelectedItems(selectedItems);
     }
   };
 
-  const ListItem = (selected) => {
+  const ListItem = selected => {
     return (
       <Flex align="center">
         <Avatar mr={2} size="sm" src={selected.image} />
@@ -61,7 +75,7 @@ export default function CreateChannelModal({ guildId, isOpen, onClose }) {
         <Formik
           initialValues={{
             name: "",
-            isPublic: true,
+            isPublic: true
           }}
           validationSchema={ChannelSchema}
           onSubmit={handleCreateChannel}
@@ -88,7 +102,7 @@ export default function CreateChannelModal({ guildId, isOpen, onClose }) {
                     </Flex>
                   </FormLabel>
                   <Switch
-                    onChange={(e) => {
+                    onChange={e => {
                       setFieldValue("isPublic", !e.target.checked);
                     }}
                   />
@@ -106,7 +120,7 @@ export default function CreateChannelModal({ guildId, isOpen, onClose }) {
                       items={members}
                       selectedItems={selectedItems}
                       itemRenderer={ListItem}
-                      onSelectedItemsChange={(changes) =>
+                      onSelectedItemsChange={changes =>
                         handleSelectedItemsChange(changes.selectedItems)
                       }
                     />
