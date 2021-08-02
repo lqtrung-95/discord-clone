@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { banMember, kickMember } from "api/handler/guilds";
 import React from "react";
@@ -16,9 +16,19 @@ import { useParams } from "react-router-dom";
 import { mKey } from "utils/querykeys";
 
 export default function ModActionModal({ member, isOpen, onClose, isBan }) {
+  const { guildId } = useParams();
+  const cache = useQueryClient();
   const action = isBan ? "Ban " : "Kick ";
 
-  async function handleBanMember() {}
+  async function handleBanMember() {
+    onClose();
+    const { data } = isBan
+      ? await banMember(guildId, member.id)
+      : await kickMember(guildId, member.id);
+    if (data) {
+      cache.invalidateQueries(mKey(guildId));
+    }
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
