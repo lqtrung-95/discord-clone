@@ -244,16 +244,19 @@ export default function GuildSettingsModal({ guildId, isOpen, onClose }) {
 }
 
 function DeleteGuildModal({ goBack, submitClose, name, guildId }) {
-  async function handleDeleteGuild() {}
+  async function handleDeleteGuild() {
+    submitClose();
+    await deleteGuild(guildId);
+  }
 
   return (
     <ModalContent bg="brandGray.light">
       <ModalHeader fontWeight="bold" pb="0">
-        Delete name
+        Delete {name}
       </ModalHeader>
       <ModalBody pb={3}>
         <Text>
-          Are you sure you want to delete <b>name</b>? This cannot be undone.
+          Are you sure you want to delete <b>{name}</b>? This cannot be undone.
         </Text>
       </ModalBody>
 
