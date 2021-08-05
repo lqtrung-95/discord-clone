@@ -16,16 +16,20 @@ export default function Channels() {
   const {
     isOpen: inviteIsOpen,
     onOpen: inviteOpen,
-    onClose: inviteClose,
+    onClose: inviteClose
   } = useDisclosure();
   const {
     isOpen: channelIsOpen,
     onOpen: channelOpen,
-    onClose: channelClose,
+    onClose: channelClose
   } = useDisclosure();
 
   const { guildId } = useParams();
   const key = cKey(guildId);
+
+  const { data } = useQuery(key, () =>
+    getChannels(guildId).then(res => res.data)
+  );
 
   useChannelSocket(guildId, key);
 
@@ -51,7 +55,13 @@ export default function Channels() {
           />
         )}
         <UnorderedList listStyleType="none" ml="0" mt="4">
-          channels
+          {data?.map(channel => (
+            <ChannelListItem
+              key={channel.id}
+              channel={channel}
+              guildId={guildId}
+            />
+          ))}
           <Box h="16" />
         </UnorderedList>
         <AccountBar />

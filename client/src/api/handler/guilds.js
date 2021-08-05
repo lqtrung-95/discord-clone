@@ -11,7 +11,7 @@ export const getInviteLink = (id, isPermanent = false) =>
 
 export const invalidateInviteLinks = id => api.delete(`/guilds/${id}/invite`);
 
-export const getGuildMembers = () => null;
+export const getGuildMembers = guildId => api.get(`/guilds/${guildId}/members`);
 
 export const editGuild = (id, body) =>
   api.put(`/guilds/${id}`, body, {

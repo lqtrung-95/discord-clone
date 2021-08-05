@@ -29,10 +29,14 @@ import InputField from "components/shared/InputField";
 
 export default function CreateChannelModal({ guildId, isOpen, onClose }) {
   const key = mKey(guildId);
+  const { data } = useQuery(key, () =>
+    getGuildMembers(guildId).then(res => res.data)
+  );
 
   async function handleCreateChannel(values, { setErrors, resetForm }) {
     try {
       const ids = [];
+      selectedItems.map(item => ids.push(item.value));
       const { data } = await createChannel(guildId, {
         ...values,
         members: ids
@@ -48,6 +52,9 @@ export default function CreateChannelModal({ guildId, isOpen, onClose }) {
 
   const members = [];
   const [selectedItems, setSelectedItems] = useState([]);
+  data?.map(m =>
+    members.push({ label: m.username, value: m.id, image: m.image })
+  );
 
   const handleCreateItem = item => {
     setSelectedItems(curr => [...curr, item]);
