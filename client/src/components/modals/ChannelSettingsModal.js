@@ -15,12 +15,12 @@ import {
   ModalHeader,
   ModalOverlay,
   Switch,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import {
   deleteChannel,
   editChannel,
-  getPrivateChannelMembers,
+  getPrivateChannelMembers
 } from "api/handler/channel";
 import { getGuildMembers } from "api/handler/guilds";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
@@ -39,7 +39,7 @@ export default function ChannelSettingsModal({
   guildId,
   channelId,
   isOpen,
-  onClose,
+  onClose
 }) {
   const key = mKey(guildId);
 
@@ -55,27 +55,42 @@ export default function ChannelSettingsModal({
     onClose();
   };
 
-  async function handleEditChannel() {}
+  async function handleEditChannel(values, { setErrors, resetForm }) {
+    try {
+      const ids = [];
+      selectedItems.map(item => ids.push(item.value));
+      const { data } = await editChannel(guildId, channelId, {
+        ...values,
+        members: ids
+      });
+      if (data) {
+        resetForm();
+        onClose();
+      }
+    } catch (err) {
+      setErrors(toErrorMap(err));
+    }
+  }
 
   // eslint-disable-next-line
   const { data: current } = useQuery(`${channelId}-members`, async () => {
     const { data } = await getPrivateChannelMembers(channelId);
-    const current = members.filter((m) => data.includes(m.value));
+    const current = members.filter(m => data.includes(m.value));
     setSelectedItems(current);
     return current;
   });
 
-  const handleCreateItem = (item) => {
-    setSelectedItems((curr) => [...curr, item]);
+  const handleCreateItem = item => {
+    setSelectedItems(curr => [...curr, item]);
   };
 
-  const handleSelectedItemsChange = (selectedItems) => {
+  const handleSelectedItemsChange = selectedItems => {
     if (selectedItems) {
       setSelectedItems(selectedItems);
     }
   };
 
-  const ListItem = (selected) => {
+  const ListItem = selected => {
     return (
       <Flex align="center">
         <Avatar mr={2} size="sm" src={selected.image} />
@@ -94,7 +109,7 @@ export default function ChannelSettingsModal({
           <Formik
             initialValues={{
               name: channel.name,
-              isPublic: channel.isPublic,
+              isPublic: channel.isPublic
             }}
             validationSchema={ChannelSchema}
             onSubmit={handleEditChannel}
@@ -122,7 +137,7 @@ export default function ChannelSettingsModal({
                     </FormLabel>
                     <Switch
                       defaultChecked={!values.isPublic}
-                      onChange={(e) => {
+                      onChange={e => {
                         setFieldValue("isPublic", !e.target.checked);
                       }}
                     />
@@ -140,7 +155,7 @@ export default function ChannelSettingsModal({
                         items={members}
                         selectedItems={selectedItems}
                         itemRenderer={ListItem}
-                        onSelectedItemsChange={(changes) =>
+                        onSelectedItemsChange={changes =>
                           handleSelectedItemsChange(changes.selectedItems)
                         }
                       />
