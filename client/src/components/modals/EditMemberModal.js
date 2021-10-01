@@ -28,7 +28,23 @@ export default function EditMemberModal({ guildId, isOpen, onClose }) {
   const { data } = useQuery(`settings-${guildId}`, () =>
     getGuildMemberSettings(guildId).then(res => res.data)
   );
-  async function handleEditMemberAppearance() {}
+  async function handleEditMemberAppearance(
+    values,
+    { setErrors, setFieldValue }
+  ) {
+    try {
+      if (values.color === "#fff") {
+        setFieldValue("color", null);
+      }
+
+      const { data } = await changeGuildMemberSettings(guildId, values);
+      if (data) {
+        onClose();
+      }
+    } catch (err) {
+      setErrors(toErrorMap(err));
+    }
+  }
 
   if (!data) return null;
 
