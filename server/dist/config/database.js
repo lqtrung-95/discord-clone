@@ -30,7 +30,7 @@ let DatabaseConnectionService = class DatabaseConnectionService {
     }
 };
 DatabaseConnectionService = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], DatabaseConnectionService);
 exports.DatabaseConnectionService = DatabaseConnectionService;
 //# sourceMappingURL=database.js.map

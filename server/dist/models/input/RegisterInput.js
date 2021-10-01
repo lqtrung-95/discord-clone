@@ -14,21 +14,21 @@ const swagger_1 = require("@nestjs/swagger");
 class RegisterInput {
 }
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         description: 'Min 3, max 30 characters.',
     }),
     __metadata("design:type", String)
 ], RegisterInput.prototype, "username", void 0);
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         description: 'Unique. Must be a valid email.'
     }),
     __metadata("design:type", String)
 ], RegisterInput.prototype, "email", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, description: 'Min 6, max 150 characters.' }),
+    (0, swagger_1.ApiProperty)({ type: String, description: 'Min 6, max 150 characters.' }),
     __metadata("design:type", String)
 ], RegisterInput.prototype, "password", void 0);
 exports.RegisterInput = RegisterInput;

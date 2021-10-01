@@ -14,35 +14,35 @@ const swagger_1 = require("@nestjs/swagger");
 class GuildResponse {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], GuildResponse.prototype, "id", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], GuildResponse.prototype, "name", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], GuildResponse.prototype, "icon", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], GuildResponse.prototype, "default_channel_id", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], GuildResponse.prototype, "ownerId", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], GuildResponse.prototype, "createdAt", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], GuildResponse.prototype, "updatedAt", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: Boolean }),
+    (0, swagger_1.ApiProperty)({ type: Boolean }),
     __metadata("design:type", Boolean)
 ], GuildResponse.prototype, "hasNotification", void 0);
 exports.GuildResponse = GuildResponse;

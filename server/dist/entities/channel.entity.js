@@ -18,27 +18,27 @@ const pcmember_entity_1 = require("./pcmember.entity");
 let Channel = class Channel extends abstract_entity_1.AbstractEntity {
 };
 __decorate([
-    typeorm_1.Column('varchar'),
+    (0, typeorm_1.Column)('varchar'),
     __metadata("design:type", String)
 ], Channel.prototype, "name", void 0);
 __decorate([
-    typeorm_1.Column('boolean', { default: true }),
+    (0, typeorm_1.Column)('boolean', { default: true }),
     __metadata("design:type", Boolean)
 ], Channel.prototype, "isPublic", void 0);
 __decorate([
-    typeorm_1.Column('boolean', { default: false }),
+    (0, typeorm_1.Column)('boolean', { default: false }),
     __metadata("design:type", Boolean)
 ], Channel.prototype, "dm", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => guild_entity_1.Guild, (guild) => guild.id, {
+    (0, typeorm_1.ManyToOne)(() => guild_entity_1.Guild, (guild) => guild.id, {
         nullable: true,
         onDelete: 'CASCADE'
     }),
     __metadata("design:type", guild_entity_1.Guild)
 ], Channel.prototype, "guild", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => user_entity_1.User, { onDelete: 'CASCADE' }),
-    typeorm_1.JoinTable({
+    (0, typeorm_1.ManyToMany)(() => user_entity_1.User, { onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinTable)({
         name: 'channel_member',
         joinColumn: {
             name: 'channels',
@@ -52,15 +52,15 @@ __decorate([
     __metadata("design:type", Array)
 ], Channel.prototype, "members", void 0);
 __decorate([
-    typeorm_1.OneToMany(() => pcmember_entity_1.PCMember, (pcmember) => pcmember.channel),
+    (0, typeorm_1.OneToMany)(() => pcmember_entity_1.PCMember, (pcmember) => pcmember.channel),
     __metadata("design:type", Array)
 ], Channel.prototype, "pcmembers", void 0);
 __decorate([
-    typeorm_1.CreateDateColumn(),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", String)
 ], Channel.prototype, "lastActivity", void 0);
 Channel = __decorate([
-    typeorm_1.Entity('channels')
+    (0, typeorm_1.Entity)('channels')
 ], Channel);
 exports.Channel = Channel;
 //# sourceMappingURL=channel.entity.js.map

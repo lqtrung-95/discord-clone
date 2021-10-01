@@ -5,7 +5,7 @@ const platform_socket_io_1 = require("@nestjs/platform-socket.io");
 const redisIoAdapter = require("socket.io-redis");
 const dotenv_1 = require("dotenv");
 const redis_1 = require("./redis");
-dotenv_1.config();
+(0, dotenv_1.config)();
 class RedisIoAdapter extends platform_socket_io_1.IoAdapter {
     createIOServer(port, options) {
         const server = super.createIOServer(port, options);

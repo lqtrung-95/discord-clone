@@ -12,11 +12,11 @@ const redis_adapter_1 = require("./config/redis.adapter");
 const redis_1 = require("./config/redis");
 const path_1 = require("path");
 const RedisStore = require('rate-limit-redis');
-dotenv_1.config();
+(0, dotenv_1.config)();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useWebSocketAdapter(new redis_adapter_1.RedisIoAdapter(app));
-    app.useStaticAssets(path_1.join(__dirname, '..', 'static'), { prefix: '/ws' });
+    app.useStaticAssets((0, path_1.join)(__dirname, '..', 'static'), { prefix: '/ws' });
     app.setGlobalPrefix('api');
     app.set('trust proxy', 1);
     app.use(helmet());

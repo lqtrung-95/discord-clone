@@ -17,25 +17,25 @@ const channel_entity_1 = require("./channel.entity");
 let PCMember = class PCMember extends abstract_entity_1.AbstractEntity {
 };
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], PCMember.prototype, "userId", void 0);
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], PCMember.prototype, "channelId", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => user_entity_1.User, (user) => user.channels, { primary: true, onDelete: 'CASCADE' }),
-    typeorm_1.JoinColumn({ name: 'userId' }),
+    (0, typeorm_1.ManyToMany)(() => user_entity_1.User, (user) => user.channels, { primary: true, onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'userId' }),
     __metadata("design:type", user_entity_1.User)
 ], PCMember.prototype, "user", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => channel_entity_1.Channel, (channel) => channel.members, { primary: true, onDelete: 'CASCADE' }),
-    typeorm_1.JoinColumn({ name: 'channelId' }),
+    (0, typeorm_1.ManyToMany)(() => channel_entity_1.Channel, (channel) => channel.members, { primary: true, onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'channelId' }),
     __metadata("design:type", channel_entity_1.Channel)
 ], PCMember.prototype, "channel", void 0);
 PCMember = __decorate([
-    typeorm_1.Entity('pcmembers')
+    (0, typeorm_1.Entity)('pcmembers')
 ], PCMember);
 exports.PCMember = PCMember;
 //# sourceMappingURL=pcmember.entity.js.map

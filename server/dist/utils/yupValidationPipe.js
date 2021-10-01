@@ -21,14 +21,14 @@ let YupValidationPipe = class YupValidationPipe {
             await this.schema.validate(value, { abortEarly: false });
         }
         catch (err) {
-            const errors = serializeValidationError_1.serializeValidationError(err);
+            const errors = (0, serializeValidationError_1.serializeValidationError)(err);
             throw new common_1.HttpException({ message: 'Input data validation failed', errors }, common_1.HttpStatus.BAD_REQUEST);
         }
         return value;
     }
 };
 YupValidationPipe = __decorate([
-    common_1.Injectable(),
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [Object])
 ], YupValidationPipe);
 exports.YupValidationPipe = YupValidationPipe;

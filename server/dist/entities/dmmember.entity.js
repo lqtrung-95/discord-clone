@@ -17,29 +17,29 @@ const channel_entity_1 = require("./channel.entity");
 let DMMember = class DMMember extends abstract_entity_1.AbstractEntity {
 };
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], DMMember.prototype, "userId", void 0);
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], DMMember.prototype, "channelId", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => user_entity_1.User, (user) => user.channels, { primary: true, onDelete: 'CASCADE' }),
-    typeorm_1.JoinColumn({ name: 'userId' }),
+    (0, typeorm_1.ManyToMany)(() => user_entity_1.User, (user) => user.channels, { primary: true, onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'userId' }),
     __metadata("design:type", user_entity_1.User)
 ], DMMember.prototype, "user", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => channel_entity_1.Channel, (channel) => channel.members, { primary: true, onDelete: 'CASCADE' }),
-    typeorm_1.JoinColumn({ name: 'channelId' }),
+    (0, typeorm_1.ManyToMany)(() => channel_entity_1.Channel, (channel) => channel.members, { primary: true, onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'channelId' }),
     __metadata("design:type", channel_entity_1.Channel)
 ], DMMember.prototype, "channel", void 0);
 __decorate([
-    typeorm_1.Column('boolean', { default: false }),
+    (0, typeorm_1.Column)('boolean', { default: false }),
     __metadata("design:type", Boolean)
 ], DMMember.prototype, "isOpen", void 0);
 DMMember = __decorate([
-    typeorm_1.Entity('dm_members')
+    (0, typeorm_1.Entity)('dm_members')
 ], DMMember);
 exports.DMMember = DMMember;
 //# sourceMappingURL=dmmember.entity.js.map

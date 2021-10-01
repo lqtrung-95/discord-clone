@@ -15,31 +15,31 @@ const MemberResponse_1 = require("./MemberResponse");
 class MessageResponse {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MessageResponse.prototype, "id", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MessageResponse.prototype, "text", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MessageResponse.prototype, "url", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MessageResponse.prototype, "filetype", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: MessageResponse }),
+    (0, swagger_1.ApiProperty)({ type: MessageResponse }),
     __metadata("design:type", MemberResponse_1.MemberResponse)
 ], MessageResponse.prototype, "user", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MessageResponse.prototype, "createdAt", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MessageResponse.prototype, "updatedAt", void 0);
 exports.MessageResponse = MessageResponse;

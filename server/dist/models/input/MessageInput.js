@@ -14,7 +14,7 @@ const swagger_1 = require("@nestjs/swagger");
 class MessageInput {
 }
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         required: false,
         description: "The message. Must not be empty"
@@ -22,7 +22,7 @@ __decorate([
     __metadata("design:type", String)
 ], MessageInput.prototype, "text", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, required: false }),
+    (0, swagger_1.ApiProperty)({ type: String, required: false }),
     __metadata("design:type", String)
 ], MessageInput.prototype, "file", void 0);
 exports.MessageInput = MessageInput;

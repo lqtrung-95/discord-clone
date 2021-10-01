@@ -14,24 +14,24 @@ const typeorm_1 = require("typeorm");
 const idGenerator_1 = require("../utils/idGenerator");
 class AbstractEntity extends typeorm_1.BaseEntity {
     async generateId() {
-        this.id = await idGenerator_1.idGenerator();
+        this.id = await (0, idGenerator_1.idGenerator)();
     }
 }
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], AbstractEntity.prototype, "id", void 0);
 __decorate([
-    typeorm_1.CreateDateColumn(),
-    typeorm_1.Index(),
+    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.Index)(),
     __metadata("design:type", Date)
 ], AbstractEntity.prototype, "createdAt", void 0);
 __decorate([
-    typeorm_1.UpdateDateColumn(),
+    (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
 ], AbstractEntity.prototype, "updatedAt", void 0);
 __decorate([
-    typeorm_1.BeforeInsert(),
+    (0, typeorm_1.BeforeInsert)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)

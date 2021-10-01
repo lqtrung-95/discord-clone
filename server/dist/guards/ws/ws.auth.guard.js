@@ -16,7 +16,7 @@ let WsAuthGuard = class WsAuthGuard {
     }
 };
 WsAuthGuard = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], WsAuthGuard);
 exports.WsAuthGuard = WsAuthGuard;
 //# sourceMappingURL=ws.auth.guard.js.map

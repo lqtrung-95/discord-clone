@@ -37,7 +37,7 @@ let GuildService = class GuildService {
         this.socketService = socketService;
     }
     async getGuildMembers(guildId) {
-        const manager = typeorm_2.getManager();
+        const manager = (0, typeorm_2.getManager)();
         return await manager.query(`select distinct u.id,
                        u.username,
                        u.image,
@@ -52,7 +52,7 @@ let GuildService = class GuildService {
       `, [guildId]);
     }
     async getUserGuilds(userId) {
-        const manager = typeorm_2.getManager();
+        const manager = (0, typeorm_2.getManager)();
         return await manager.query(`select distinct g."id",
                        g."name",
                        g."ownerId",
@@ -82,7 +82,7 @@ let GuildService = class GuildService {
         try {
             let guild = null;
             let channel = null;
-            await typeorm_2.getManager().transaction(async (entityManager) => {
+            await (0, typeorm_2.getManager)().transaction(async (entityManager) => {
                 guild = this.guildRepository.create({ ownerId: userId });
                 channel = this.channelRepository.create({ name: 'general' });
                 guild.name = name.trim();
@@ -92,7 +92,7 @@ let GuildService = class GuildService {
                 await channel.save();
                 await entityManager.save(channel);
                 await entityManager.insert(member_entity_1.Member, {
-                    id: await idGenerator_1.idGenerator(),
+                    id: await (0, idGenerator_1.idGenerator)(),
                     guildId: guild.id,
                     userId,
                 });
@@ -104,7 +104,7 @@ let GuildService = class GuildService {
         }
     }
     async generateInviteLink(guildId, isPermanent = false) {
-        const token = nanoid_1.nanoid(8);
+        const token = (0, nanoid_1.nanoid)(8);
         const json = JSON.stringify({
             guildId,
             isPermanent,
@@ -159,7 +159,7 @@ let GuildService = class GuildService {
             throw new common_1.BadRequestException('You are already a member of this guild');
         }
         await this.memberRepository.insert({
-            id: await idGenerator_1.idGenerator(),
+            id: await (0, idGenerator_1.idGenerator)(),
             userId,
             guildId,
         });
@@ -203,7 +203,7 @@ let GuildService = class GuildService {
         }
         let icon = input.image;
         if (image) {
-            const uImage = await fileUtils_1.uploadFromBuffer(image);
+            const uImage = await (0, fileUtils_1.uploadFromBuffer)(image);
             icon = uImage.secure_url;
         }
         if (icon === 'null')
@@ -224,7 +224,7 @@ let GuildService = class GuildService {
             throw new common_1.UnauthorizedException();
         }
         let memberIds;
-        const manager = typeorm_2.getManager();
+        const manager = (0, typeorm_2.getManager)();
         memberIds = await manager.query('delete from members where "guildId" = $1 returning members."userId";', [guildId]);
         await manager.query('delete from pcmembers where "channelId" = (select id from channels where "guildId" = $1);', [guildId]);
         await manager.query('delete from bans where "guildId" = $1;', [guildId]);
@@ -293,7 +293,7 @@ let GuildService = class GuildService {
         this.socketService.removeMember({ room: guildId, memberId: userId });
         this.socketService.removeFromGuild(memberId, guildId);
         await this.banRepository.insert({
-            id: await idGenerator_1.idGenerator(),
+            id: await (0, idGenerator_1.idGenerator)(),
             guildId,
             userId: memberId,
         });
@@ -309,7 +309,7 @@ let GuildService = class GuildService {
     }
     async getBannedUsers(userId, guildId) {
         await this.checkGuildOwnership(userId, guildId);
-        const manager = typeorm_2.getManager();
+        const manager = (0, typeorm_2.getManager)();
         return await manager.query(`select u.id, u.username, u.image
        from bans b join users u on b."userId" = u.id
        where b."guildId" = $1`, [guildId]);
@@ -353,12 +353,12 @@ let GuildService = class GuildService {
     }
 };
 GuildService = __decorate([
-    common_1.Injectable(),
-    __param(0, typeorm_1.InjectRepository(guild_entity_1.Guild)),
-    __param(1, typeorm_1.InjectRepository(channel_entity_1.Channel)),
-    __param(2, typeorm_1.InjectRepository(user_entity_1.User)),
-    __param(3, typeorm_1.InjectRepository(member_entity_1.Member)),
-    __param(4, typeorm_1.InjectRepository(ban_entity_1.BanEntity)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(guild_entity_1.Guild)),
+    __param(1, (0, typeorm_1.InjectRepository)(channel_entity_1.Channel)),
+    __param(2, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(3, (0, typeorm_1.InjectRepository)(member_entity_1.Member)),
+    __param(4, (0, typeorm_1.InjectRepository)(ban_entity_1.BanEntity)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository,

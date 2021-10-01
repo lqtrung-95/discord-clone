@@ -67,77 +67,77 @@ let AppGateway = class AppGateway {
     }
 };
 __decorate([
-    websockets_1.WebSocketServer(),
+    (0, websockets_1.WebSocketServer)(),
     __metadata("design:type", Object)
 ], AppGateway.prototype, "server", void 0);
 __decorate([
-    common_1.UseGuards(ws_auth_guard_1.WsAuthGuard),
-    websockets_1.SubscribeMessage('toggleOnline'),
+    (0, common_1.UseGuards)(ws_auth_guard_1.WsAuthGuard),
+    (0, websockets_1.SubscribeMessage)('toggleOnline'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleToggleOnline", null);
 __decorate([
-    common_1.UseGuards(ws_auth_guard_1.WsAuthGuard),
-    websockets_1.SubscribeMessage('toggleOffline'),
+    (0, common_1.UseGuards)(ws_auth_guard_1.WsAuthGuard),
+    (0, websockets_1.SubscribeMessage)('toggleOffline'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleToggleOffline", null);
 __decorate([
-    common_1.UseGuards(ws_auth_guard_1.WsAuthGuard),
-    websockets_1.SubscribeMessage('joinUser'),
+    (0, common_1.UseGuards)(ws_auth_guard_1.WsAuthGuard),
+    (0, websockets_1.SubscribeMessage)('joinUser'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleUserJoin", null);
 __decorate([
-    common_1.UseGuards(ws_auth_guard_1.WsAuthGuard),
-    websockets_1.SubscribeMessage('joinChannel'),
+    (0, common_1.UseGuards)(ws_auth_guard_1.WsAuthGuard),
+    (0, websockets_1.SubscribeMessage)('joinChannel'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleChannelJoin", null);
 __decorate([
-    common_1.UseGuards(ws_guild_guard_1.WsMemberGuard),
-    websockets_1.SubscribeMessage('joinGuild'),
+    (0, common_1.UseGuards)(ws_guild_guard_1.WsMemberGuard),
+    (0, websockets_1.SubscribeMessage)('joinGuild'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleGuildJoin", null);
 __decorate([
-    websockets_1.SubscribeMessage('leaveGuild'),
+    (0, websockets_1.SubscribeMessage)('leaveGuild'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleGuildLeave", null);
 __decorate([
-    websockets_1.SubscribeMessage('leaveRoom'),
+    (0, websockets_1.SubscribeMessage)('leaveRoom'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleRoomLeave", null);
 __decorate([
-    websockets_1.SubscribeMessage('startTyping'),
+    (0, websockets_1.SubscribeMessage)('startTyping'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Array]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleStartTyping", null);
 __decorate([
-    websockets_1.SubscribeMessage('stopTyping'),
+    (0, websockets_1.SubscribeMessage)('stopTyping'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Array]),
     __metadata("design:returntype", void 0)
 ], AppGateway.prototype, "handleStopTyping", null);
 __decorate([
-    common_1.UseGuards(ws_auth_guard_1.WsAuthGuard),
-    websockets_1.SubscribeMessage('getRequestCount'),
+    (0, common_1.UseGuards)(ws_auth_guard_1.WsAuthGuard),
+    (0, websockets_1.SubscribeMessage)('getRequestCount'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AppGateway.prototype, "handleGetFriendRequestCount", null);
 AppGateway = __decorate([
-    websockets_1.WebSocketGateway({ namespace: '/ws', transports: ['websocket'], upgrade: false }),
+    (0, websockets_1.WebSocketGateway)({ namespace: '/ws', transports: ['websocket'], upgrade: false }),
     __metadata("design:paramtypes", [socket_service_1.SocketService])
 ], AppGateway);
 exports.AppGateway = AppGateway;

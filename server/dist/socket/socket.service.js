@@ -99,7 +99,7 @@ let SocketService = class SocketService {
     async toggleOnlineStatus(client) {
         const id = client.handshake.session['userId'];
         await this.setOnlineStatus(id, true);
-        const manager = typeorm_1.getManager();
+        const manager = (0, typeorm_1.getManager)();
         const ids = await manager.query(`
           select g.id
           from guilds g
@@ -119,7 +119,7 @@ let SocketService = class SocketService {
     async toggleOfflineStatus(client) {
         const id = client.handshake.session['userId'];
         await this.setOnlineStatus(id, false);
-        const manager = typeorm_1.getManager();
+        const manager = (0, typeorm_1.getManager)();
         const ids = await manager.query(`
           select g.id
           from guilds g
@@ -139,7 +139,7 @@ let SocketService = class SocketService {
     }
     async updateLastSeen(client, room) {
         const id = client.handshake.session['userId'];
-        const manager = typeorm_1.getManager();
+        const manager = (0, typeorm_1.getManager)();
         manager.query(`
           update members
           set "lastSeen" = CURRENT_TIMESTAMP
@@ -194,7 +194,7 @@ let SocketService = class SocketService {
         return true;
     }
     async getPendingFriendRequestCount(userId) {
-        const manager = typeorm_1.getManager();
+        const manager = (0, typeorm_1.getManager)();
         const result = await manager.query(`
           select count(u.id)
           from users u
@@ -204,7 +204,7 @@ let SocketService = class SocketService {
         this.socket.to(userId).emit('requestCount', result[0]['count']);
     }
     async getGuildMemberIds(guildId) {
-        const manager = typeorm_1.getManager();
+        const manager = (0, typeorm_1.getManager)();
         return await manager.query(`
           select m."userId"
           from guilds g
@@ -214,12 +214,12 @@ let SocketService = class SocketService {
     }
 };
 SocketService = __decorate([
-    common_1.Injectable(),
-    __param(0, typeorm_2.InjectRepository(user_entity_1.User)),
-    __param(1, typeorm_2.InjectRepository(channel_entity_1.Channel)),
-    __param(2, typeorm_2.InjectRepository(member_entity_1.Member)),
-    __param(3, typeorm_2.InjectRepository(pcmember_entity_1.PCMember)),
-    __param(4, typeorm_2.InjectRepository(dmmember_entity_1.DMMember)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_2.InjectRepository)(user_entity_1.User)),
+    __param(1, (0, typeorm_2.InjectRepository)(channel_entity_1.Channel)),
+    __param(2, (0, typeorm_2.InjectRepository)(member_entity_1.Member)),
+    __param(3, (0, typeorm_2.InjectRepository)(pcmember_entity_1.PCMember)),
+    __param(4, (0, typeorm_2.InjectRepository)(dmmember_entity_1.DMMember)),
     __metadata("design:paramtypes", [typeorm_1.Repository,
         typeorm_1.Repository,
         typeorm_1.Repository,

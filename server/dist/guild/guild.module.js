@@ -19,7 +19,7 @@ const ban_entity_1 = require("../entities/ban.entity");
 let GuildModule = class GuildModule {
 };
 GuildModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([guild_entity_1.Guild, user_entity_1.User, member_entity_1.Member, channel_entity_1.Channel, ban_entity_1.BanEntity])],
         controllers: [guild_controller_1.GuildController],
         providers: [guild_service_1.GuildService]

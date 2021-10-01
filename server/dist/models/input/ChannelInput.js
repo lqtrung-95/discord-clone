@@ -18,15 +18,15 @@ class ChannelInput {
     }
 }
 __decorate([
-    swagger_1.ApiProperty({ description: 'Channel Name. 3 to 30 characters' }),
+    (0, swagger_1.ApiProperty)({ description: 'Channel Name. 3 to 30 characters' }),
     __metadata("design:type", String)
 ], ChannelInput.prototype, "name", void 0);
 __decorate([
-    swagger_1.ApiProperty({ required: false, default: true }),
+    (0, swagger_1.ApiProperty)({ required: false, default: true }),
     __metadata("design:type", Boolean)
 ], ChannelInput.prototype, "isPublic", void 0);
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: [String],
         required: false,
         description: 'Member IDs that are allowed in the channel'

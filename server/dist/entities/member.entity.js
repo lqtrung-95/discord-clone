@@ -17,37 +17,37 @@ const guild_entity_1 = require("./guild.entity");
 let Member = class Member extends abstract_entity_1.AbstractEntity {
 };
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], Member.prototype, "userId", void 0);
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], Member.prototype, "guildId", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => user_entity_1.User, (user) => user.guilds, { primary: true }),
-    typeorm_1.JoinColumn({ name: 'userId' }),
+    (0, typeorm_1.ManyToMany)(() => user_entity_1.User, (user) => user.guilds, { primary: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'userId' }),
     __metadata("design:type", user_entity_1.User)
 ], Member.prototype, "user", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => guild_entity_1.Guild, (guild) => guild.members, { primary: true, onDelete: 'CASCADE' }),
-    typeorm_1.JoinColumn({ name: 'guildId' }),
+    (0, typeorm_1.ManyToMany)(() => guild_entity_1.Guild, (guild) => guild.members, { primary: true, onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'guildId' }),
     __metadata("design:type", guild_entity_1.Guild)
 ], Member.prototype, "guild", void 0);
 __decorate([
-    typeorm_1.Column("varchar", { nullable: true }),
+    (0, typeorm_1.Column)("varchar", { nullable: true }),
     __metadata("design:type", String)
 ], Member.prototype, "nickname", void 0);
 __decorate([
-    typeorm_1.Column("varchar", { nullable: true }),
+    (0, typeorm_1.Column)("varchar", { nullable: true }),
     __metadata("design:type", String)
 ], Member.prototype, "color", void 0);
 __decorate([
-    typeorm_1.CreateDateColumn(),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", String)
 ], Member.prototype, "lastSeen", void 0);
 Member = __decorate([
-    typeorm_1.Entity('members')
+    (0, typeorm_1.Entity)('members')
 ], Member);
 exports.Member = Member;
 //# sourceMappingURL=member.entity.js.map

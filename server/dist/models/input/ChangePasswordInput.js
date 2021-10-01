@@ -14,15 +14,15 @@ const swagger_1 = require("@nestjs/swagger");
 class ChangePasswordInput {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], ChangePasswordInput.prototype, "currentPassword", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, description: 'Min 6, max 150 characters.' }),
+    (0, swagger_1.ApiProperty)({ type: String, description: 'Min 6, max 150 characters.' }),
     __metadata("design:type", String)
 ], ChangePasswordInput.prototype, "newPassword", void 0);
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         description: 'Must be the same as the newPassword value.',
     }),

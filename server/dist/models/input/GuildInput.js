@@ -14,11 +14,11 @@ const swagger_1 = require("@nestjs/swagger");
 class GuildInput {
 }
 __decorate([
-    swagger_1.ApiProperty({ description: 'Guild Name. 3 to 30 characters' }),
+    (0, swagger_1.ApiProperty)({ description: 'Guild Name. 3 to 30 characters' }),
     __metadata("design:type", String)
 ], GuildInput.prototype, "name", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, required: false }),
+    (0, swagger_1.ApiProperty)({ type: String, required: false }),
     __metadata("design:type", String)
 ], GuildInput.prototype, "image", void 0);
 exports.GuildInput = GuildInput;

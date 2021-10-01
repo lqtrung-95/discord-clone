@@ -14,18 +14,18 @@ const swagger_1 = require("@nestjs/swagger");
 class UpdateInput {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String, description: 'Unique. Must be a valid email.' }),
+    (0, swagger_1.ApiProperty)({ type: String, description: 'Unique. Must be a valid email.' }),
     __metadata("design:type", String)
 ], UpdateInput.prototype, "email", void 0);
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         description: 'Min 3, max 30 characters.',
     }),
     __metadata("design:type", String)
 ], UpdateInput.prototype, "username", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, required: false }),
+    (0, swagger_1.ApiProperty)({ type: String, required: false }),
     __metadata("design:type", String)
 ], UpdateInput.prototype, "image", void 0);
 exports.UpdateInput = UpdateInput;

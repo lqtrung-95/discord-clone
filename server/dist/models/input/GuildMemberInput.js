@@ -14,11 +14,11 @@ const swagger_1 = require("@nestjs/swagger");
 class GuildMemberInput {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String, required: false, description: 'Min 3, max 30 characters.' }),
+    (0, swagger_1.ApiProperty)({ type: String, required: false, description: 'Min 3, max 30 characters.' }),
     __metadata("design:type", String)
 ], GuildMemberInput.prototype, "nickname", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, required: false, description: 'Must be a valid hex string' }),
+    (0, swagger_1.ApiProperty)({ type: String, required: false, description: 'Must be a valid hex string' }),
     __metadata("design:type", String)
 ], GuildMemberInput.prototype, "color", void 0);
 exports.GuildMemberInput = GuildMemberInput;

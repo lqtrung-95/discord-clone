@@ -49,7 +49,7 @@ let MessageService = class MessageService {
             const timeString = new Date(cursor).getTime().toString();
             time = timeString.substring(0, timeString.length - 3);
         }
-        const manager = typeorm_2.getManager();
+        const manager = (0, typeorm_2.getManager)();
         const results = await manager.query(`
           SELECT "message".id,
                   "message".text,
@@ -118,7 +118,7 @@ let MessageService = class MessageService {
         const message = this.messageRepository.create(Object.assign({}, input));
         if (file && !constants_1.PRODUCTION) {
             const directory = `channels/${channelId}`;
-            const data = await fileUtils_1.uploadFromBuffer(file);
+            const data = await (0, fileUtils_1.uploadFromBuffer)(file);
             message.filetype = file.mimetype;
             message.url = data.secure_url;
         }
@@ -141,7 +141,7 @@ let MessageService = class MessageService {
         }
         this.socketService.sendMessage({ room: channelId, message: response });
         if (channel.dm) {
-            typeorm_2.getManager().query(`
+            (0, typeorm_2.getManager)().query(`
             update dm_members
             set "isOpen" = true,
                 "updatedAt" = CURRENT_TIMESTAMP
@@ -150,7 +150,7 @@ let MessageService = class MessageService {
             this.socketService.pushDMToTop({ room: channelId, channelId });
         }
         else {
-            typeorm_2.getManager().query(`
+            (0, typeorm_2.getManager)().query(`
             update channels
             set "lastActivity" = CURRENT_TIMESTAMP
             where "id" = $1
@@ -230,13 +230,13 @@ let MessageService = class MessageService {
     }
 };
 MessageService = __decorate([
-    common_1.Injectable(),
-    __param(0, typeorm_1.InjectRepository(user_entity_1.User)),
-    __param(1, typeorm_1.InjectRepository(message_entity_1.Message)),
-    __param(2, typeorm_1.InjectRepository(channel_entity_1.Channel)),
-    __param(3, typeorm_1.InjectRepository(member_entity_1.Member)),
-    __param(4, typeorm_1.InjectRepository(pcmember_entity_1.PCMember)),
-    __param(5, typeorm_1.InjectRepository(dmmember_entity_1.DMMember)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(1, (0, typeorm_1.InjectRepository)(message_entity_1.Message)),
+    __param(2, (0, typeorm_1.InjectRepository)(channel_entity_1.Channel)),
+    __param(3, (0, typeorm_1.InjectRepository)(member_entity_1.Member)),
+    __param(4, (0, typeorm_1.InjectRepository)(pcmember_entity_1.PCMember)),
+    __param(5, (0, typeorm_1.InjectRepository)(dmmember_entity_1.DMMember)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository,

@@ -15,11 +15,11 @@ const MemberResponse_1 = require("./MemberResponse");
 class DMChannelResponse {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], DMChannelResponse.prototype, "id", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: MemberResponse_1.MemberResponse }),
+    (0, swagger_1.ApiProperty)({ type: MemberResponse_1.MemberResponse }),
     __metadata("design:type", MemberResponse_1.MemberResponse)
 ], DMChannelResponse.prototype, "user", void 0);
 exports.DMChannelResponse = DMChannelResponse;

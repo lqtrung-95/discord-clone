@@ -32,7 +32,7 @@ let AppModule = class AppModule {
     }
 };
 AppModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRootAsync({
                 useClass: database_1.DatabaseConnectionService,

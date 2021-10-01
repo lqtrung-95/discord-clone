@@ -22,7 +22,7 @@ let MemberGuard = class MemberGuard {
     }
 };
 MemberGuard = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], MemberGuard);
 exports.MemberGuard = MemberGuard;
 //# sourceMappingURL=member.guard.js.map

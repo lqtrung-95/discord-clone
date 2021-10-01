@@ -21,7 +21,7 @@ const dmmember_entity_1 = require("../entities/dmmember.entity");
 let ChannelModule = class ChannelModule {
 };
 ChannelModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forFeature([channel_entity_1.Channel, guild_entity_1.Guild, member_entity_1.Member, user_entity_1.User, pcmember_entity_1.PCMember, dmmember_entity_1.DMMember]),
             socket_module_1.SocketModule

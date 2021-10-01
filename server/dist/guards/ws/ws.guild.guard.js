@@ -26,7 +26,7 @@ let WsMemberGuard = class WsMemberGuard {
     }
 };
 WsMemberGuard = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], WsMemberGuard);
 exports.WsMemberGuard = WsMemberGuard;
 //# sourceMappingURL=ws.guild.guard.js.map

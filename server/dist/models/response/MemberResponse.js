@@ -14,39 +14,39 @@ const swagger_1 = require("@nestjs/swagger");
 class MemberResponse {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MemberResponse.prototype, "id", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MemberResponse.prototype, "username", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MemberResponse.prototype, "image", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: Boolean }),
+    (0, swagger_1.ApiProperty)({ type: Boolean }),
     __metadata("design:type", Boolean)
 ], MemberResponse.prototype, "isOnline", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MemberResponse.prototype, "createdAt", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], MemberResponse.prototype, "updatedAt", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: Boolean }),
+    (0, swagger_1.ApiProperty)({ type: Boolean }),
     __metadata("design:type", Boolean)
 ], MemberResponse.prototype, "isFriend", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, required: false }),
+    (0, swagger_1.ApiProperty)({ type: String, required: false }),
     __metadata("design:type", String)
 ], MemberResponse.prototype, "nickname", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, required: false }),
+    (0, swagger_1.ApiProperty)({ type: String, required: false }),
     __metadata("design:type", String)
 ], MemberResponse.prototype, "color", void 0);
 exports.MemberResponse = MemberResponse;

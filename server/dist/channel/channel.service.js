@@ -48,7 +48,7 @@ let ChannelService = class ChannelService {
             throw new common_1.BadRequestException('Channel Limit is 50');
         }
         let channel;
-        await typeorm_2.getManager().transaction(async (entityManager) => {
+        await (0, typeorm_2.getManager)().transaction(async (entityManager) => {
             channel = this.channelRepository.create(data);
             channel.guild = guild;
             await channel.save();
@@ -61,7 +61,7 @@ let ChannelService = class ChannelService {
                 }));
                 pcmembers.forEach((member) => {
                     entityManager.insert(pcmember_entity_1.PCMember, {
-                        id: idGenerator_1.idGenerator(),
+                        id: (0, idGenerator_1.idGenerator)(),
                         channelId: channel.id,
                         userId: member.userId
                     });
@@ -74,7 +74,7 @@ let ChannelService = class ChannelService {
         return true;
     }
     async getGuildChannels(guildId, userId) {
-        const manager = typeorm_2.getManager();
+        const manager = (0, typeorm_2.getManager)();
         return await manager.query(`
           select distinct on (c.id, c."createdAt") c.id, c.name, 
                  c."isPublic", c."createdAt", c."updatedAt",
@@ -95,7 +95,7 @@ let ChannelService = class ChannelService {
         if (!member) {
             throw new common_1.NotFoundException();
         }
-        const data = await typeorm_2.getManager().query(`
+        const data = await (0, typeorm_2.getManager)().query(`
         select c.id
         from channels as c, dm_members dm 
         where dm."channelId" = c."id" and c.dm = true and c."isPublic" = false
@@ -110,9 +110,9 @@ let ChannelService = class ChannelService {
                 user: member.toMember(userId)
             };
         }
-        const channelId = await typeorm_2.getManager().transaction(async (entityManager) => {
+        const channelId = await (0, typeorm_2.getManager)().transaction(async (entityManager) => {
             const channel = await this.channelRepository.create({
-                name: idGenerator_1.idGenerator(),
+                name: (0, idGenerator_1.idGenerator)(),
                 isPublic: false,
                 dm: true
             });
@@ -123,7 +123,7 @@ let ChannelService = class ChannelService {
             const dmMembers = allMembers.map((m) => ({ userId: m, channelId }));
             dmMembers.forEach((member) => {
                 entityManager.insert(dmmember_entity_1.DMMember, {
-                    id: idGenerator_1.idGenerator(),
+                    id: (0, idGenerator_1.idGenerator)(),
                     channelId,
                     userId: member.userId,
                     isOpen: member.userId === userId
@@ -137,7 +137,7 @@ let ChannelService = class ChannelService {
         };
     }
     async getDirectMessageChannels(userId) {
-        const manager = typeorm_2.getManager();
+        const manager = (0, typeorm_2.getManager)();
         const result = await manager.query(`
           select dm."channelId", u.username, u.image, u.id, u."isOnline", u."createdAt", u."updatedAt"
           from users u
@@ -185,14 +185,14 @@ let ChannelService = class ChannelService {
         const { name, isPublic } = input;
         let { members } = input;
         if (isPublic && !channel.isPublic) {
-            await typeorm_2.getManager().query('delete from pcmembers where "channelId" = $1;', [channelId]);
+            await (0, typeorm_2.getManager)().query('delete from pcmembers where "channelId" = $1;', [channelId]);
         }
         await this.channelRepository.update(channelId, {
             name: name !== null && name !== void 0 ? name : channel.name,
             isPublic: isPublic !== null && isPublic !== void 0 ? isPublic : channel.isPublic
         });
         if (!isPublic && members) {
-            await typeorm_2.getManager().transaction(async (entityManager) => {
+            await (0, typeorm_2.getManager)().transaction(async (entityManager) => {
                 members = members.filter((m) => m !== userId);
                 members.push(userId);
                 const current = await this.pcMemberRepository.find({ where: { channelId } });
@@ -204,7 +204,7 @@ let ChannelService = class ChannelService {
                 }));
                 pcmembers.forEach((member) => {
                     entityManager.insert(pcmember_entity_1.PCMember, {
-                        id: idGenerator_1.idGenerator(),
+                        id: (0, idGenerator_1.idGenerator)(),
                         channelId: channel.id,
                         userId: member.userId
                     });
@@ -236,7 +236,7 @@ let ChannelService = class ChannelService {
             throw new common_1.BadRequestException("A server needs at least one channel");
         }
         if (!channel.isPublic) {
-            await typeorm_2.getManager().query('delete from pcmembers where "channelId" = $1;', [channelId]);
+            await (0, typeorm_2.getManager)().query('delete from pcmembers where "channelId" = $1;', [channelId]);
         }
         await this.channelRepository.remove(channel);
         this.socketService.deleteChannel({ room: channel.guild.id, channelId });
@@ -255,7 +255,7 @@ let ChannelService = class ChannelService {
         }
         if (channel.isPublic)
             return [];
-        const ids = await typeorm_2.getManager().query(`
+        const ids = await (0, typeorm_2.getManager)().query(`
           select pc."userId"
           from pcmembers pc
                    join channels c on pc."channelId" = c.id
@@ -287,13 +287,13 @@ let ChannelService = class ChannelService {
     }
 };
 ChannelService = __decorate([
-    common_1.Injectable(),
-    __param(0, typeorm_1.InjectRepository(channel_entity_1.Channel)),
-    __param(1, typeorm_1.InjectRepository(guild_entity_1.Guild)),
-    __param(2, typeorm_1.InjectRepository(member_entity_1.Member)),
-    __param(3, typeorm_1.InjectRepository(user_entity_1.User)),
-    __param(4, typeorm_1.InjectRepository(pcmember_entity_1.PCMember)),
-    __param(5, typeorm_1.InjectRepository(dmmember_entity_1.DMMember)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(channel_entity_1.Channel)),
+    __param(1, (0, typeorm_1.InjectRepository)(guild_entity_1.Guild)),
+    __param(2, (0, typeorm_1.InjectRepository)(member_entity_1.Member)),
+    __param(3, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(4, (0, typeorm_1.InjectRepository)(pcmember_entity_1.PCMember)),
+    __param(5, (0, typeorm_1.InjectRepository)(dmmember_entity_1.DMMember)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository,

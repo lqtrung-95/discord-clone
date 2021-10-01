@@ -14,18 +14,18 @@ const swagger_1 = require("@nestjs/swagger");
 class ResetPasswordInput {
 }
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         description: 'The from the email provided token.',
     }),
     __metadata("design:type", String)
 ], ResetPasswordInput.prototype, "token", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String, description: 'Min 6, max 150 characters.' }),
+    (0, swagger_1.ApiProperty)({ type: String, description: 'Min 6, max 150 characters.' }),
     __metadata("design:type", String)
 ], ResetPasswordInput.prototype, "newPassword", void 0);
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         description: 'Must be the same as the newPassword value.',
     }),
@@ -35,7 +35,7 @@ exports.ResetPasswordInput = ResetPasswordInput;
 class ForgotPasswordInput {
 }
 __decorate([
-    swagger_1.ApiProperty({
+    (0, swagger_1.ApiProperty)({
         type: String,
         description: 'User Email.',
     }),

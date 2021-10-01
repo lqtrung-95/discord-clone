@@ -14,19 +14,19 @@ const swagger_1 = require("@nestjs/swagger");
 class RequestResponse {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], RequestResponse.prototype, "id", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], RequestResponse.prototype, "username", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], RequestResponse.prototype, "image", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: Number, description: "1: Incoming, 0: Outgoing" }),
+    (0, swagger_1.ApiProperty)({ type: Number, description: "1: Incoming, 0: Outgoing" }),
     __metadata("design:type", Number)
 ], RequestResponse.prototype, "type", void 0);
 exports.RequestResponse = RequestResponse;

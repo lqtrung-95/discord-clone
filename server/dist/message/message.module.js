@@ -21,7 +21,7 @@ const dmmember_entity_1 = require("../entities/dmmember.entity");
 let MessageModule = class MessageModule {
 };
 MessageModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forFeature([message_entity_1.Message, channel_entity_1.Channel, user_entity_1.User, pcmember_entity_1.PCMember, member_entity_1.Member, dmmember_entity_1.DMMember]),
             socket_module_1.SocketModule

@@ -6,7 +6,7 @@ const constants_1 = require("../utils/constants");
 const redis_1 = require("./redis");
 const connectRedis = require("connect-redis");
 const dotenv_1 = require("dotenv");
-dotenv_1.config();
+(0, dotenv_1.config)();
 const RedisStore = connectRedis(session);
 exports.sessionMiddleware = session({
     name: constants_1.COOKIE_NAME,

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadFromBuffer = void 0;
 const dotenv_1 = require("dotenv");
 const path = require("path");
-dotenv_1.config();
+(0, dotenv_1.config)();
 const cloudinary = require('cloudinary').v2;
 const streamifier = require('streamifier');
 cloudinary.config({

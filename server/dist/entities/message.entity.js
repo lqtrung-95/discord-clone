@@ -17,35 +17,35 @@ const abstract_entity_1 = require("./abstract.entity");
 const class_transformer_1 = require("class-transformer");
 let Message = class Message extends abstract_entity_1.AbstractEntity {
     toJSON(userId) {
-        const response = class_transformer_1.classToPlain(this);
+        const response = (0, class_transformer_1.classToPlain)(this);
         response.user = this.user.toMember(userId);
         return response;
     }
 };
 __decorate([
-    typeorm_1.Column('text', { nullable: true }),
+    (0, typeorm_1.Column)('text', { nullable: true }),
     __metadata("design:type", String)
 ], Message.prototype, "text", void 0);
 __decorate([
-    typeorm_1.Column('text', { nullable: true }),
+    (0, typeorm_1.Column)('text', { nullable: true }),
     __metadata("design:type", String)
 ], Message.prototype, "url", void 0);
 __decorate([
-    typeorm_1.Column('varchar', { length: 50, nullable: true }),
+    (0, typeorm_1.Column)('varchar', { length: 50, nullable: true }),
     __metadata("design:type", String)
 ], Message.prototype, "filetype", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => channel_entity_1.Channel, { onDelete: 'CASCADE' }),
-    class_transformer_1.Exclude(),
+    (0, typeorm_1.ManyToOne)(() => channel_entity_1.Channel, { onDelete: 'CASCADE' }),
+    (0, class_transformer_1.Exclude)(),
     __metadata("design:type", channel_entity_1.Channel)
 ], Message.prototype, "channel", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => user_entity_1.User, (user) => user.id),
-    class_transformer_1.Exclude(),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.id),
+    (0, class_transformer_1.Exclude)(),
     __metadata("design:type", user_entity_1.User)
 ], Message.prototype, "user", void 0);
 Message = __decorate([
-    typeorm_1.Entity('messages')
+    (0, typeorm_1.Entity)('messages')
 ], Message);
 exports.Message = Message;
 //# sourceMappingURL=message.entity.js.map

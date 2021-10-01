@@ -17,25 +17,25 @@ const guild_entity_1 = require("./guild.entity");
 let BanEntity = class BanEntity extends abstract_entity_1.AbstractEntity {
 };
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], BanEntity.prototype, "userId", void 0);
 __decorate([
-    typeorm_1.PrimaryColumn(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], BanEntity.prototype, "guildId", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => user_entity_1.User, (user) => user.bans, { primary: true }),
-    typeorm_1.JoinColumn({ name: 'userId' }),
+    (0, typeorm_1.ManyToMany)(() => user_entity_1.User, (user) => user.bans, { primary: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'userId' }),
     __metadata("design:type", user_entity_1.User)
 ], BanEntity.prototype, "user", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => guild_entity_1.Guild, (guild) => guild.bans, { primary: true, onDelete: 'CASCADE' }),
-    typeorm_1.JoinColumn({ name: 'guildId' }),
+    (0, typeorm_1.ManyToMany)(() => guild_entity_1.Guild, (guild) => guild.bans, { primary: true, onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'guildId' }),
     __metadata("design:type", guild_entity_1.Guild)
 ], BanEntity.prototype, "guild", void 0);
 BanEntity = __decorate([
-    typeorm_1.Entity('bans')
+    (0, typeorm_1.Entity)('bans')
 ], BanEntity);
 exports.BanEntity = BanEntity;
 //# sourceMappingURL=ban.entity.js.map

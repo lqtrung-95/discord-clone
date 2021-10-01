@@ -14,11 +14,11 @@ const swagger_1 = require("@nestjs/swagger");
 class ValidationErrors {
 }
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], ValidationErrors.prototype, "field", void 0);
 __decorate([
-    swagger_1.ApiProperty({ type: String }),
+    (0, swagger_1.ApiProperty)({ type: String }),
     __metadata("design:type", String)
 ], ValidationErrors.prototype, "message", void 0);
 exports.ValidationErrors = ValidationErrors;
