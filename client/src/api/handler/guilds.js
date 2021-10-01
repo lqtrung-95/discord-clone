@@ -22,7 +22,7 @@ export const editGuild = (id, body) =>
 
 export const deleteGuild = id => api.delete(`/guilds/${id}/delete`);
 
-export const getGuildMemberSettings = () => null;
+export const getGuildMemberSettings = id => api.get(`/guilds/${id}/member`);
 
 export const changeGuildMemberSettings = () => null;
 
