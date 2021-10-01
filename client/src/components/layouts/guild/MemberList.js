@@ -12,9 +12,22 @@ import memberScrollbarCss from "./css/MemberScrollerCSS";
 export default function MemberList() {
   const { guildId } = useParams();
   const key = mKey(guildId);
+  const { data } = useQuery(key, () =>
+    getGuildMembers(guildId).then(res => res.data)
+  );
 
   const online = [];
   const offline = [];
+
+  if (data) {
+    data.forEach(member => {
+      if (member.isOnline) {
+        online.push(member);
+      } else {
+        offline.push(member);
+      }
+    });
+  }
 
   useMemberSocket(guildId, key);
 
@@ -29,11 +42,11 @@ export default function MemberList() {
     >
       <UnorderedList listStyleType="none" ml="0">
         <OnlineLabel label={`online—${online.length}`} />
-        {online.map((m) => (
+        {online.map(m => (
           <MemberListItem key={m.id} member={m} />
         ))}
         <OnlineLabel label={`offline—${offline.length}`} />
-        {offline.map((m) => (
+        {offline.map(m => (
           <MemberListItem key={m.id} member={m} />
         ))}
       </UnorderedList>
