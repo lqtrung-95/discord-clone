@@ -21,6 +21,8 @@ const message_module_1 = require("./message/message.module");
 const socket_module_1 = require("./socket/socket.module");
 const typeorm_2 = require("typeorm");
 const constants_1 = require("./utils/constants");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
     constructor(connection) {
         this.connection = connection;
@@ -34,23 +36,27 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, "..", "app"),
+                exclude: ["/api/*", "/ws/*"]
+            }),
             typeorm_1.TypeOrmModule.forRootAsync({
-                useClass: database_1.DatabaseConnectionService,
+                useClass: database_1.DatabaseConnectionService
             }),
             common_1.CacheModule.register({
                 store: redisStore,
                 host: process.env.REDIS_HOST,
                 port: process.env.REDIS_PORT,
-                password: process.env.REDIS_PASSWORD,
+                password: process.env.REDIS_PASSWORD
             }),
             user_module_1.UserModule,
             guild_module_1.GuildModule,
             channel_module_1.ChannelModule,
             message_module_1.MessageModule,
-            socket_module_1.SocketModule,
+            socket_module_1.SocketModule
         ],
         controllers: [],
-        providers: [],
+        providers: []
     }),
     __metadata("design:paramtypes", [typeorm_2.Connection])
 ], AppModule);
